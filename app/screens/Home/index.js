@@ -35,10 +35,10 @@ componentDidMount(){
     })
     // alert(state.isConnected)
     // console.log("Is connected?", state.isConnected);
-  },()=>{
-    this.onRefresh();
   });
-
+  setTimeout(()=> {
+    this.onRefresh();
+  }, 500);
   
   
 }
