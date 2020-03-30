@@ -39,7 +39,7 @@ componentDidMount(){
   setTimeout(()=> {
     this.onRefresh();
   }, 500);
-  
+ 
   
 }
 onRefresh=()=>{
@@ -136,7 +136,7 @@ this.setState({
      tempGraphDataX.forEach(item=>{
         let newDate=item.split('/')
         // newDate=newDate[0]+'/'+newDate[1];
-        const data =moment(newDate[0]).format('MMM')+'/'+newDate[1]
+        const data =moment(newDate[0]).format('MMM')+'-'+newDate[1]
         graphDataX.push(data)
        
       });
