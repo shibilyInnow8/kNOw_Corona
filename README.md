@@ -70,3 +70,4 @@ This Type based Architecture scales smoothly for small - medium apps. If you guy
 ## Contributing
 
 PRs are welcome
+# kNOw_Corona
