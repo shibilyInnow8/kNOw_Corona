@@ -38,7 +38,7 @@ componentDidMount(){
   });
   setTimeout(()=> {
     this.onRefresh();
-  }, 500);
+  }, 800);
  
   
 }
@@ -132,12 +132,17 @@ this.setState({
     let graphDataY=[0];
     if(countryTimeline&&countryTimeline[0]){
       const tempXData= Object.keys(countryTimeline[0]);
+      // console.log('tempXData',tempXData)
      const tempGraphDataX= tempXData.filter((item,index)=>index>tempXData.length-8&&index!==tempXData.length-1&&index!==tempXData.length-2)
      tempGraphDataX.forEach(item=>{
         let newDate=item.split('/')
-        // newDate=newDate[0]+'/'+newDate[1];
-        const data =moment(newDate[0]).format('MMM')+'-'+newDate[1]
-        graphDataX.push(data)
+        // console.log('newDate',newDate)
+        let Xdata=newDate[0]+'/'+newDate[1]
+        if(newDate[0].length===1){
+          Xdata="0"+newDate[0]+'/'+newDate[1]
+        }
+         
+        graphDataX.push(Xdata)
        
       });
       const tempYData= Object.values(countryTimeline[0]);
