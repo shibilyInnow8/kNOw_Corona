@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { View, Text,Dimensions,ScrollView,TouchableOpacity,Linking } from 'react-native';
+import { View, Text,Dimensions,ScrollView,TouchableOpacity,Linking,SafeAreaView } from 'react-native';
 import styles from './styles';
 import { connect } from "react-redux";
 import { TabView, TabBar } from 'react-native-tab-view';
@@ -173,7 +173,7 @@ setIndex=(index)=>{
   render(){
     const initialLayout = { width: Dimensions.get('window').width };
   return (
-  
+  <SafeAreaView style={{flex:1}}>
       <TabView
       navigationState={{ index:this.state.selectedIndex, routes:this.state.tabs }}
       renderScene={()=>this.renderScene()}
@@ -191,7 +191,7 @@ setIndex=(index)=>{
       }
       
     />
-   
+   </SafeAreaView>
   );
 }
 }

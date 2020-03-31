@@ -13,7 +13,8 @@ const images = {
     share: require('../assets/images/share.png'),
     aboutUs: require('../assets/images/aboutUs.png'),
     logo: require('../assets/images/logo.png'),
-    virus: require('../assets/images/virus.png'),
+    satyamev: require('../assets/images/satyamev.png'),
+    powered_logo: require('../assets/images/INNOW8.png'),
   },
 };
 

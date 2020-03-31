@@ -12,4 +12,18 @@
         android:layout_gravity="center"
         android:src="@drawable/launch_screen" />
 
+<RelativeLayout
+    android:layout_gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:background="#1F2241"
+    android:layout_marginBottom="20dp"
+    >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/powered_logo" />
+</RelativeLayout>
 </FrameLayout>

@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { View, Text,Switch,TouchableOpacity,Image,Linking } from 'react-native';
+import { View, Text,Switch,TouchableOpacity,Image,Linking,SafeAreaView,ScrollView } from 'react-native';
 import styles from './styles';
 import { connect } from "react-redux";
 import Style from '../../config/styles'
@@ -76,12 +76,12 @@ toggleSwitch=(state)=>{
     priority: 'hight',
     visibility: 'public',
     importance: 'hight',
-    bigText:'Handwash Alert!',
+    // bigText:'Handwash Alert!',
     /* iOS and Android properties */
     message:'Please wash your hand with soap', // (required)
     playSound: false,
     number: 1,
-    actions: '["OK"]',
+    // actions: '["OK"]',
 
     // for production
     repeatType: 'hour', // (optional) Repeating interval. Check 'Repeating Notifications' section for more info.
@@ -102,7 +102,8 @@ else{
   render(){
     const { notificationState } = this.props;
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={{flex:1}}>
      <View style={styles.viewWrapper}>
        <Text style={{color:Style.color.COLOR_WHITE,fontSize:16}}>Enable handwash alert</Text>
 
@@ -133,7 +134,7 @@ else{
 
        <TouchableOpacity style={styles.viewWrapper} activeOpacity={0.6}
        onPress={()=>
-         this.openLink('https://www.innow8apps.com/')
+         this.props.navigation.navigate('About')
          }
        >
        <Text style={{color:Style.color.COLOR_WHITE,fontSize:16}}>About us</Text>
@@ -146,10 +147,18 @@ else{
        <Text style={{color:Style.color.COLOR_WHITE,fontSize:16}}>Feedback</Text>
       <Image style={styles.iconsWrapper} source={images.icons.feedback}/>
        </TouchableOpacity>
-         <View style={{height:'50%',width:'100%',justifyContent:'center',alignItems:'center'}}>
+         <View style={{width:'100%',justifyContent:'center',alignItems:'center'}}>
          <Image style={styles.logoImage} source={images.icons.logo}/>
+         
            </View>
-    </View>
+           <View style={{width:'100%',alignItems:'center',position:'absolute',bottom:10}}>
+             <Text style={{color:Style.color.COLOR_WHITE,marginRight:10,textAlign:'center',fontSize:getHeight(14)}}>Powered by</Text>
+           <Image 
+         style={{width:getWidth(100),height:getHeight(40),resizeMode:'contain',marginRight:10,marginTop:5}} 
+         source={images.icons.powered_logo}/>
+         </View>
+         </ScrollView>
+    </SafeAreaView>
   );
 }
 }

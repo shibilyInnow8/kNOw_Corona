@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Preventives from 'app/screens/Preventives';
 import Home from 'app/screens/Home';
 import Settings from 'app/screens/Settings';
+import About from 'app/screens/About';
 import Images from '../config/images'
 import Styles from '../config/styles'
 const PreventionIcon = ({ tintColor }) => (
@@ -26,6 +27,33 @@ const MoreIcon = ({ tintColor }) => (
   style={[{width:45,height:45}, { tintColor: tintColor }]}
 />
 );
+const settingsTab = createStackNavigator({
+  Settings:{screen: Settings,
+    navigationOptions:{
+      cardStyle: {
+        // makes transparentCard work for android
+        backgroundColor:'#1F2241',
+        },
+    }
+    
+  },
+  About:{
+    screen: About,
+    navigationOptions:{
+      cardStyle: {
+        // makes transparentCard work for android
+        backgroundColor:'#1F2241',
+        },
+    }
+  }
+},
+{
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
+  }
+})
+
 const TabNavigator = createBottomTabNavigator({
   Home: {
     screen: Home,
@@ -40,7 +68,7 @@ const TabNavigator = createBottomTabNavigator({
       }
 },
   More: {
-    screen: Settings,
+    screen: settingsTab,
     navigationOptions: {
         tabBarIcon: MoreIcon
       }

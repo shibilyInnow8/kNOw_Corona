@@ -128,41 +128,63 @@ this.setState({
     const { refreshing,globalData,countryData,countryDetails,countryNews,countryTimeline } = this.props
     const {pickerVisible,selectedCountry,buttonVisible,graphSelected}=this.state
     let newsData=[];
-    let graphDataX=[];
+    let graphDataX=[0];
     let graphDataY=[0];
+    let dataShouldRender;
     if(countryTimeline&&countryTimeline[0]){
-      const tempXData= Object.keys(countryTimeline[0]);
-      // console.log('tempXData',tempXData)
-     const tempGraphDataX= tempXData.filter((item,index)=>index>tempXData.length-8&&index!==tempXData.length-1&&index!==tempXData.length-2)
-     tempGraphDataX.forEach(item=>{
-        let newDate=item.split('/')
-        // console.log('newDate',newDate)
-        let Xdata=newDate[0]+'/'+newDate[1]
-        if(newDate[0].length===1){
-          Xdata="0"+newDate[0]+'/'+newDate[1]
-        }
-         
-        graphDataX.push(Xdata)
+      graphDataX.splice(0,1);
+      graphDataY.splice(0,1)
+      if(graphSelected==='case'){
+        dataShouldRender="total_cases"
+      }
        
-      });
-      const tempYData= Object.values(countryTimeline[0]);
-      const tempGraphDataY= tempYData.filter((item,index)=>index>tempYData.length-8&&index!==tempYData.length-1&&index!==tempYData.length-2)
-      graphDataY.splice(0,1);
-      tempGraphDataY.forEach(item=>{
-        if(graphSelected==='case'){
-          graphDataY.push(item.total_cases)
-        }
-         
-        else if(graphSelected==='death'){
-          graphDataY.push(item.total_deaths)
-        }
-        else{
-          graphDataY.push(item.total_recoveries)
-        }
-        
-        //  console.log('total_cases',graphDataY)
-        
-       });
+      else if(graphSelected==='death'){
+        dataShouldRender="total_deaths"
+      }
+      else{
+        dataShouldRender="total_recoveries"
+      }
+      
+      let firstDay = new Date();
+      firstDay.setDate( firstDay.getDate() - 5 );
+       const firstKey =moment(firstDay).format('M/DD/YYYY');
+       const firstData= countryTimeline[0][firstKey]
+       firstDay=moment(firstDay).format('MMM-DD');
+       graphDataX.push(firstDay);
+       graphDataY.push(firstData[dataShouldRender])
+
+       let secondDay = new Date();
+       secondDay.setDate( secondDay.getDate() - 4 );
+        const secondKey =moment(secondDay).format('M/DD/YYYY');
+        const secondData= countryTimeline[0][secondKey]
+        secondDay=moment(secondDay).format('MMM-DD');
+        graphDataX.push(secondDay);
+        graphDataY.push(secondData[dataShouldRender])
+
+        let thirdDay = new Date();
+        thirdDay.setDate( thirdDay.getDate() - 3 );
+         const thirdKey =moment(thirdDay).format('M/DD/YYYY');
+         const thirdData= countryTimeline[0][thirdKey]
+         thirdDay=moment(thirdDay).format('MMM-DD');
+         graphDataX.push(thirdDay);
+         graphDataY.push(thirdData[dataShouldRender])
+
+         let fourthDay = new Date();
+         fourthDay.setDate( fourthDay.getDate() - 2 );
+          const fourthKey =moment(fourthDay).format('M/DD/YYYY');
+          const fourthData= countryTimeline[0][fourthKey]
+          fourthDay=moment(fourthDay).format('MMM-DD');
+          graphDataX.push(fourthDay);
+          graphDataY.push(fourthData[dataShouldRender])
+
+          let fifthDay = new Date();
+          fifthDay.setDate( fifthDay.getDate() - 1 );
+           const fifthKey =moment(fifthDay).format('M/DD/YYYY');
+           const fifthData= countryTimeline[0][fifthKey]
+           fifthDay=moment(fifthDay).format('MMM-DD');
+           graphDataX.push(fifthDay);
+           graphDataY.push(fifthData[dataShouldRender])
+
     }
     if(countryNews&&countryNews[0]){
       const tempData= Object.values(countryNews[0]);
@@ -211,6 +233,33 @@ this.setState({
       <Image style={styles.dropdownImage} source={images.icons.dropdown}/>
                     </TouchableOpacity>
                     <View style={styles.borderLineView}/>
+                    {countryDetails.name.toLocaleUpperCase()==='INDIA'&&
+                    <TouchableOpacity
+                    animation="slideInDown"
+                    style={{
+                      width:'100%',
+                      height:getHeight(70),
+                      backgroundColor:Style.color.COLOR_SECONDARY,
+                      alignItems:'center',
+                      flexDirection:'row',
+                      paddingHorizontal:getWidth(15)
+                    }}
+                    onPress={()=>this.handleClick('https://pmnrf.gov.in/en/online-donation')}
+                    activeOpacity={0.6}
+                    >
+                    <Image source={images.icons.satyamev} style={{width:getHeight(40),height:getHeight(40),resizeMode:"contain"}}/>
+                    {/* <Image source={images.icons.a} style={{width:getHeight(40),height:getHeight(40),resizeMode:"contain"}}/> */}
+                    <View>
+                    <Text style={{color:Style.color.COLOR_WHITE,fontSize:getHeight(18)}}>
+                      PM CARES Fund
+                    </Text>
+                    <Text style={{color:Style.color.COLOR_WHITE,fontSize:getHeight(14)}}>
+                      Click here to donate to India's war against COVID-19.
+                    </Text>
+                    </View>
+                      </TouchableOpacity>
+                    }
+                    
                     <View style={styles.countryStatusMainView}>
 
                       <TouchableOpacity 
