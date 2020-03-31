@@ -120,7 +120,7 @@ else{
        <TouchableOpacity style={styles.viewWrapper} activeOpacity={0.6} onPress={()=>
          this.openLink('https://www.youtube.com/playlist?list=PL9S6xGsoqIBU2V6AZYGlJwZRAFJ3YDreb')
          }>
-       <Text style={{color:Style.color.COLOR_WHITE,fontSize:16}}>Videos on youtube</Text>
+       <Text style={{color:Style.color.COLOR_WHITE,fontSize:16}}>WHO Recommended Videos</Text>
        <Image style={{tintColor:Style.color.COLOR_VIOLET,
        width:getWidth(20),height:getWidth(20),
        resizeMode:'contain',marginRight:getWidth(10)}} source={images.icons.youtube}/>
