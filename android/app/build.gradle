@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.corona"
+        applicationId "com.Innow8.knowcorona"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

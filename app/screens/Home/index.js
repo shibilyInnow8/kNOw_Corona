@@ -132,8 +132,7 @@ this.setState({
     let graphDataY=[0];
     let dataShouldRender;
     if(countryTimeline&&countryTimeline[0]){
-      graphDataX.splice(0,1);
-      graphDataY.splice(0,1)
+     
       if(graphSelected==='case'){
         dataShouldRender="total_cases"
       }
@@ -147,43 +146,55 @@ this.setState({
       
       let firstDay = new Date();
       firstDay.setDate( firstDay.getDate() - 5 );
-       const firstKey =moment(firstDay).format('M/DD/YYYY');
+       const firstKey =moment(firstDay).format('M/DD/YY');
        const firstData= countryTimeline[0][firstKey]
        firstDay=moment(firstDay).format('MMM-DD');
+       if(typeof firstData!=='undefined' ){
+        graphDataX.splice(0,1);
+        graphDataY.splice(0,1)
        graphDataX.push(firstDay);
-       graphDataY.push(firstData[dataShouldRender])
-
+       graphDataY.push(firstData[dataShouldRender]);
+       }
        let secondDay = new Date();
        secondDay.setDate( secondDay.getDate() - 4 );
-        const secondKey =moment(secondDay).format('M/DD/YYYY');
+        const secondKey =moment(secondDay).format('M/DD/YY');
         const secondData= countryTimeline[0][secondKey]
         secondDay=moment(secondDay).format('MMM-DD');
+        if(typeof secondData!=='undefined' ){
         graphDataX.push(secondDay);
         graphDataY.push(secondData[dataShouldRender])
+        }
 
         let thirdDay = new Date();
         thirdDay.setDate( thirdDay.getDate() - 3 );
-         const thirdKey =moment(thirdDay).format('M/DD/YYYY');
+         const thirdKey =moment(thirdDay).format('M/DD/YY');
          const thirdData= countryTimeline[0][thirdKey]
          thirdDay=moment(thirdDay).format('MMM-DD');
+         if(typeof thirdData!=='undefined' ){
          graphDataX.push(thirdDay);
          graphDataY.push(thirdData[dataShouldRender])
+         }
 
          let fourthDay = new Date();
          fourthDay.setDate( fourthDay.getDate() - 2 );
-          const fourthKey =moment(fourthDay).format('M/DD/YYYY');
+          const fourthKey =moment(fourthDay).format('M/DD/YY');
           const fourthData= countryTimeline[0][fourthKey]
           fourthDay=moment(fourthDay).format('MMM-DD');
+          if(typeof fourthData!=='undefined' ){
           graphDataX.push(fourthDay);
           graphDataY.push(fourthData[dataShouldRender])
+          }
 
           let fifthDay = new Date();
           fifthDay.setDate( fifthDay.getDate() - 1 );
-           const fifthKey =moment(fifthDay).format('M/DD/YYYY');
+           const fifthKey =moment(fifthDay).format('M/DD/YY');
            const fifthData= countryTimeline[0][fifthKey]
            fifthDay=moment(fifthDay).format('MMM-DD');
+           console.log('data',typeof fifthData )
+           if(typeof fifthData!=='undefined' ){
            graphDataX.push(fifthDay);
            graphDataY.push(fifthData[dataShouldRender])
+           }
 
     }
     if(countryNews&&countryNews[0]){
@@ -191,7 +202,7 @@ this.setState({
       newsData= tempData.filter((item,index)=>index>tempData.length-50)
       newsData=newsData.reverse();
     }
-    // console.log(newsData)
+    
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.container}> 
@@ -332,9 +343,9 @@ this.setState({
     }}
   />
                          </View >
-                         <Text style={{color:Style.color.COLOR_VIOLET_LIGHT,fontSize:16,alignSelf:'center',marginBottom:10}}>{graphSelected==='case'?"Total cases reported in last 5 days":
-                         graphSelected==='death'?"Total death reported in last 5 days":
-                         "Total recoveries reported in last 5 days"
+                         <Text style={{color:Style.color.COLOR_VIOLET_LIGHT,fontSize:16,alignSelf:'center',marginBottom:10}}>{graphDataY.length===0?"Graph data not available":graphSelected==='case'?`Total cases reported in last ${graphDataY.length} days`:
+                         graphSelected==='death'?`Total death reported in last ${graphDataY.length} days`:
+                         `Total recoveries reported in last ${graphDataY.length} days`
                            }</Text>
                       <View style={styles.worldStatusWrapper}>
                           <View style={styles.worldStatusView1}>

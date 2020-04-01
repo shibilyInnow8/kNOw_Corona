@@ -40,11 +40,15 @@ share=(mode)=>{
   Share.shareSingle(shareOptions);
   }
   else{
+    let url="https://play.google.com/store/apps/details?id=com.Innow8.knowcorona"
+    if(Platform.OS==='ios'){
+      url=""
+    }
     const options = {
       title: 'kNOw Corona',
       subject:'kNOw Corona',
       message: 'Download this application to know more about COVID-19.',
-      url: '',
+      url: url,
     }
     Share.open(options)
     .then((res) => { 
