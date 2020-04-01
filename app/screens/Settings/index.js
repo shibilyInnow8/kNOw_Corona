@@ -42,7 +42,7 @@ share=(mode)=>{
   else{
     let url="https://play.google.com/store/apps/details?id=com.Innow8.knowcorona"
     if(Platform.OS==='ios'){
-      url=""
+      url="https://apps.apple.com/us/app/kNOw-Corona/id1505466040?ls=1"
     }
     const options = {
       title: 'kNOw Corona',
